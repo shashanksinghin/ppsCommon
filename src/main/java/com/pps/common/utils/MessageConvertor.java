@@ -49,6 +49,8 @@ public class MessageConvertor {
 	public static String covertPojToJson(PaymentCanonical paymentCanonical) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.registerModule(new JavaTimeModule());
+		
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
 		String json = null;
 		try {
@@ -63,6 +65,8 @@ public class MessageConvertor {
 	public static String covertPojToJson(PaymentProcessingEvent paymentProcessingEvent) {
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.registerModule(new JavaTimeModule());
+		
+		objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
 		String json = null;
 		try {
@@ -79,7 +83,7 @@ public class MessageConvertor {
 		PaymentCanonical paymentCanonical = null;
 
 		objectMapper.findAndRegisterModules();
-
+		
 		try {
 			paymentCanonical = objectMapper.readValue(paymentCanonicalJson, PaymentCanonical.class);
 		} catch (JsonMappingException e) {
@@ -98,7 +102,7 @@ public class MessageConvertor {
 		PaymentProcessingEvent paymentProcessingEvent = null;
 
 		objectMapper.findAndRegisterModules();
-
+		
 		try {
 			paymentProcessingEvent = objectMapper.readValue(paymentCanonicalJson, PaymentProcessingEvent.class);
 		} catch (JsonMappingException e) {
